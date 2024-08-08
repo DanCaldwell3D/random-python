@@ -71,8 +71,13 @@ def generate_hsv_colour_table(num_h: int, num_s: int, num_v: int) -> list[Colour
     
     return hsv_colour_list
 
+def write_palette_file(colour_table: list, output_file_path: Path) -> None:
+    with open(output_file_path, mode="w") as file:
+        file.write("GIMP Palette\n")
+        for colour in colour_table:
+            file.write(f"{colour[0]} {colour[1]} {colour[2]} Untitled\n")
 
-colour_table = generate_hsv_colour_table(12, 5, 5)
+colour_table = generate_hsv_colour_table(24, 5, 6)
 
 rgb_table = []
 for colour in colour_table:
@@ -82,3 +87,4 @@ for colour in colour_table:
 for colour in rgb_table:
     print(colour)
 
+write_palette_file(rgb_table, "test_palette.gpl")
